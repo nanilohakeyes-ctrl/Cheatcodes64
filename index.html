@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cheatcodes 64 | Beauty. Unlocked.</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink:#ff50d0;--pink-light:#ff90e8;--pink-glow:rgba(255,80,200,0.4);
+    --blue:#50b4ff;--blue-light:#90d4ff;--blue-glow:rgba(80,180,255,0.4);
+    --gold:#ffd080;--gold-glow:rgba(255,200,80,0.4);
+    --green:#50ffb4;--green-glow:rgba(80,255,180,0.4);
+    --purple:#c084fc;--purple-glow:rgba(192,132,252,0.4);
+    --bg:#07050f;--bg2:#0d0820;--bg3:#050e2a;
+    --text:#e8d8ff;--text-dim:rgba(200,180,255,0.5);
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;overflow-x:hidden;cursor:none;}
+
+  .cursor{position:fixed;width:12px;height:12px;background:var(--pink);border-radius:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--pink-glow),0 0 20px var(--pink-glow);}
+  .cursor-trail{position:fixed;width:6px;height:6px;background:var(--blue);border-radius:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .12s ease,top .12s ease;box-shadow:0 0 8px var(--blue-glow);}
+  .grid-bg{position:fixed;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,80,200,.03) 60px,rgba(255,80,200,.03) 61px),repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(80,180,255,.03) 60px,rgba(80,180,255,.03) 61px);pointer-events:none;z-index:0;}
+  .scanlines{position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 4px,rgba(0,0,0,.08) 4px,rgba(0,0,0,.08) 5px);pointer-events:none;z-index:1;}
+
+  /* FLOATING BUTTON */
+  .level-up-btn{position:fixed;bottom:32px;right:32px;z-index:500;font-family:'Press Start 2P',monospace;font-size:8px;padding:14px 20px;background:linear-gradient(135deg,var(--pink),#c030a0);color:#fff;border:none;cursor:none;letter-spacing:1.5px;box-shadow:0 0 20px var(--pink-glow),0 0 40px rgba(255,80,200,.2);clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:transform .2s,box-shadow .2s;animation:pulse-btn 2.5s ease-in-out infinite;text-decoration:none;display:block;}
+  .level-up-btn:hover{transform:translateY(-4px);box-shadow:0 0 35px var(--pink-glow),0 0 60px rgba(255,80,200,.35);}
+  @keyframes pulse-btn{0%,100%{box-shadow:0 0 20px var(--pink-glow),0 0 40px rgba(255,80,200,.2);}50%{box-shadow:0 0 30px var(--pink-glow),0 0 60px rgba(255,80,200,.35);}}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(7,5,15,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,80,200,.2);}
+  nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink),var(--blue),var(--pink));background-size:200% 100%;animation:shimmer 3s linear infinite;}
+  @keyframes shimmer{0%{background-position:0%;}100%{background-position:200%;}}
+  .nav-logo{font-family:'Orbitron',monospace;font-weight:900;font-size:16px;background:linear-gradient(90deg,var(--pink-light),#fff,var(--blue-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;filter:drop-shadow(0 0 8px var(--pink-glow));}
+  .nav-links{display:flex;gap:28px;list-style:none;}
+  .nav-links a{font-family:'Press Start 2P',monospace;font-size:6.5px;color:var(--text-dim);text-decoration:none;letter-spacing:1px;transition:color .2s;position:relative;}
+  .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--pink);transform:scaleX(0);transition:transform .2s;}
+  .nav-links a:hover{color:var(--pink-light);text-shadow:0 0 10px var(--pink-glow);}
+  .nav-links a:hover::after{transform:scaleX(1);}
+
+  /* HERO */
+  #home{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;overflow:hidden;z-index:2;}
+  .hero-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+  .orb-pink{width:600px;height:600px;background:radial-gradient(circle,rgba(255,80,200,.2),transparent 70%);top:-150px;left:-150px;animation:drift 8s ease-in-out infinite alternate;}
+  .orb-blue{width:500px;height:500px;background:radial-gradient(circle,rgba(80,180,255,.15),transparent 70%);bottom:-100px;right:-100px;animation:drift 10s ease-in-out infinite alternate-reverse;}
+  @keyframes drift{0%{transform:translate(0,0);}100%{transform:translate(40px,30px);}}
+  .hero-badge{display:inline-block;font-family:'Press Start 2P',monospace;font-size:8px;color:var(--pink);border:1px solid rgba(255,80,200,.4);background:rgba(255,80,200,.08);padding:8px 16px;letter-spacing:2px;margin-bottom:24px;animation:blink-soft 2s ease-in-out infinite;}
+  @keyframes blink-soft{0%,100%{opacity:1;box-shadow:0 0 10px var(--pink-glow);}50%{opacity:.7;box-shadow:0 0 20px var(--pink-glow);}}
+  .hero-title{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(40px,8vw,90px);line-height:1;letter-spacing:-2px;background:linear-gradient(135deg,var(--pink-light) 0%,#fff 45%,var(--blue-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 30px var(--pink-glow));margin-bottom:8px;}
+  .hero-title-2{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(40px,8vw,90px);line-height:1;letter-spacing:-2px;background:linear-gradient(135deg,var(--blue-light) 0%,#fff 45%,var(--pink-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 30px var(--blue-glow));margin-bottom:40px;}
+  .mission{max-width:700px;margin:0 auto 44px;padding:30px 36px;border:1px solid rgba(255,80,200,.2);background:rgba(255,80,200,.04);position:relative;}
+  .mission::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--pink),var(--blue),transparent);}
+  .mission::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--blue),var(--pink),transparent);}
+  .mission-text{font-family:'Rajdhani',sans-serif;font-size:19px;font-weight:400;line-height:1.85;color:rgba(232,216,255,.9);letter-spacing:.3px;}
+  .mission-text em{font-style:normal;color:var(--pink-light);font-weight:600;}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:48px;}
+  .hchip{font-family:'Press Start 2P',monospace;font-size:8px;padding:8px 14px;letter-spacing:1px;}
+  .hchip-pink{background:rgba(255,80,200,.12);border:1px solid rgba(255,80,200,.4);color:var(--pink-light);}
+  .hchip-blue{background:rgba(80,180,255,.12);border:1px solid rgba(80,180,255,.4);color:var(--blue-light);}
+  .hchip-gold{background:rgba(255,200,80,.12);border:1px solid rgba(255,200,80,.4);color:var(--gold);}
+  .hchip-green{background:rgba(80,255,180,.12);border:1px solid rgba(80,255,180,.4);color:var(--green);}
+  .hchip-purple{background:rgba(192,132,252,.12);border:1px solid rgba(192,132,252,.4);color:var(--purple);}
+  .btn-primary{display:inline-block;font-family:'Press Start 2P',monospace;font-size:9px;padding:16px 36px;background:linear-gradient(90deg,var(--pink),#c030a0);color:#fff;text-decoration:none;letter-spacing:2px;cursor:none;transition:transform .2s,box-shadow .2s;box-shadow:0 0 20px var(--pink-glow);clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 0 30px var(--pink-glow);}
+  .btn-secondary{display:inline-block;font-family:'Press Start 2P',monospace;font-size:9px;padding:14px 34px;background:transparent;color:var(--blue-light);text-decoration:none;letter-spacing:2px;border:2px solid var(--blue);cursor:none;transition:transform .2s,box-shadow .2s,background .2s;box-shadow:0 0 16px var(--blue-glow);clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);margin-left:16px;}
+  .btn-secondary:hover{background:rgba(80,180,255,.1);transform:translateY(-3px);box-shadow:0 0 30px var(--blue-glow);}
+  .scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:bounce 2s ease-in-out infinite;}
+  .scroll-hint span{font-family:'Press Start 2P',monospace;font-size:6px;color:var(--text-dim);letter-spacing:2px;}
+  .scroll-arrow{width:10px;height:10px;border-right:2px solid var(--pink);border-bottom:2px solid var(--pink);transform:rotate(45deg);}
+  @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
+
+  /* LAYOUT */
+  .sw{position:relative;z-index:2;padding:100px 48px;max-width:1200px;margin:0 auto;}
+  .section-header{text-align:center;margin-bottom:64px;}
+  .section-eyebrow{font-family:'Press Start 2P',monospace;font-size:7px;color:var(--pink);letter-spacing:4px;text-transform:uppercase;margin-bottom:16px;display:block;}
+  .section-title{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(28px,4vw,48px);background:linear-gradient(90deg,var(--pink-light),#fff,var(--blue-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;}
+  .section-line{width:120px;height:2px;background:linear-gradient(90deg,var(--pink),var(--blue));margin:0 auto;}
+  .section-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--pink),var(--blue),transparent);position:relative;z-index:2;opacity:.3;}
+
+  /* CENTERED DISCLAIMER */
+  .price-disclaimer{
+    display:block;
+    width:fit-content;
+    margin:0 auto 40px;
+    font-family:'Press Start 2P',monospace;
+    font-size:6.5px;
+    color:var(--gold);
+    letter-spacing:1.5px;
+    padding:12px 24px;
+    border:1px solid rgba(255,200,80,.25);
+    background:rgba(255,200,80,.05);
+    text-align:center;
+  }
+
+  /* SERVICE CARDS */
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+  .card-featured{grid-column:1 / -1;}
+  .service-card{background:linear-gradient(135deg,rgba(255,80,200,.05),rgba(80,180,255,.05));border:1px solid rgba(255,80,200,.2);padding:36px 28px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));}
+  .service-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,80,200,.08),transparent);opacity:0;transition:opacity .3s;}
+  .service-card:hover{transform:translateY(-6px);border-color:var(--pink);box-shadow:0 0 30px var(--pink-glow),0 20px 40px rgba(0,0,0,.5);}
+  .service-card:hover::before{opacity:1;}
+  .service-card.ba{border-color:rgba(80,180,255,.2);}
+  .service-card.ba::before{background:linear-gradient(135deg,rgba(80,180,255,.08),transparent);}
+  .service-card.ba:hover{border-color:var(--blue);box-shadow:0 0 30px var(--blue-glow),0 20px 40px rgba(0,0,0,.5);}
+  .service-card.ga{border-color:rgba(255,200,80,.25);background:linear-gradient(135deg,rgba(255,200,80,.05),rgba(255,80,200,.05));}
+  .service-card.ga::before{background:linear-gradient(135deg,rgba(255,200,80,.1),transparent);}
+  .service-card.ga:hover{border-color:var(--gold);box-shadow:0 0 40px var(--gold-glow),0 20px 40px rgba(0,0,0,.5);}
+  .service-card.gra{border-color:rgba(80,255,180,.2);}
+  .service-card.gra::before{background:linear-gradient(135deg,rgba(80,255,180,.08),transparent);}
+  .service-card.gra:hover{border-color:var(--green);box-shadow:0 0 30px var(--green-glow),0 20px 40px rgba(0,0,0,.5);}
+  .service-card.special{border-color:rgba(255,200,80,.35);background:linear-gradient(135deg,rgba(255,200,80,.07),rgba(255,80,200,.05));}
+  .service-card.special:hover{border-color:var(--gold);box-shadow:0 0 40px var(--gold-glow),0 20px 40px rgba(0,0,0,.6);}
+  .service-card.color-hero{border-color:rgba(255,200,80,.4);background:linear-gradient(135deg,rgba(255,200,80,.07),rgba(255,80,200,.07),rgba(80,180,255,.07));padding:40px 36px;}
+  .service-card.color-hero::before{background:linear-gradient(135deg,rgba(255,200,80,.12),rgba(255,80,200,.06),transparent);}
+  .service-card.color-hero:hover{border-color:var(--gold);box-shadow:0 0 50px var(--gold-glow),0 0 30px var(--pink-glow),0 20px 40px rgba(0,0,0,.6);}
+  /* COMING SOON CARD */
+  .service-card.coming{border-color:rgba(192,132,252,.25);background:linear-gradient(135deg,rgba(192,132,252,.05),rgba(80,180,255,.05));opacity:.85;}
+  .service-card.coming::before{background:linear-gradient(135deg,rgba(192,132,252,.08),transparent);}
+  .service-card.coming:hover{border-color:var(--purple);box-shadow:0 0 30px var(--purple-glow),0 20px 40px rgba(0,0,0,.5);opacity:1;}
+  .coming-badge{display:inline-block;font-family:'Press Start 2P',monospace;font-size:6px;padding:4px 10px;background:rgba(192,132,252,.18);border:1px solid rgba(192,132,252,.5);color:var(--purple);letter-spacing:2px;margin-bottom:14px;animation:blink-soft 2.5s ease-in-out infinite;}
+
+  .color-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;}
+  .color-analysis-items{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+  .ca-item{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;background:rgba(255,200,80,.06);border-left:3px solid var(--gold);}
+  .ca-label{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--gold);min-width:90px;}
+  .ca-desc{font-size:13px;color:var(--text-dim);line-height:1.5;}
+  .expert-badge{display:inline-block;font-family:'Press Start 2P',monospace;font-size:6px;padding:5px 10px;background:rgba(255,200,80,.2);border:1px solid var(--gold);color:var(--gold);letter-spacing:1px;margin-bottom:16px;}
+
+  /* SERVICE DIVIDER LINE between color sections */
+  .service-divider-line{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,200,80,.3),transparent);margin:20px 0;}
+  .service-section-label{font-family:'Press Start 2P',monospace;font-size:6px;color:rgba(255,200,80,.6);letter-spacing:3px;margin-bottom:14px;display:block;margin-top:20px;}
+
+  .sname{font-family:'Orbitron',monospace;font-weight:700;font-size:17px;color:#fff;margin-bottom:12px;letter-spacing:1px;display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+  .sstar{color:var(--pink-light);font-size:16px;line-height:1;}
+  .ba .sstar{color:var(--blue-light);}
+  .ga .sstar,.special .sstar,.color-hero .sstar{color:var(--gold);}
+  .gra .sstar{color:var(--green);}
+  .coming .sstar{color:var(--purple);}
+  .sdesc{font-size:16px;font-weight:400;color:var(--text-dim);line-height:1.7;margin-bottom:22px;}
+  .sdesc em{font-style:normal;color:rgba(232,216,255,.85);font-weight:600;}
+  .sprices{display:flex;flex-direction:column;gap:8px;}
+  .prow{display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:600;color:rgba(200,180,255,.85);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+  .prow:last-child{border-bottom:none;}
+  .pamt{font-family:'Orbitron',monospace;font-size:14px;color:var(--pink-light);}
+  .ba .pamt{color:var(--blue-light);}
+  .ga .pamt,.special .pamt,.color-hero .pamt{color:var(--gold);}
+  .gra .pamt{color:var(--green);}
+  .coming .pamt{color:var(--purple);}
+  .included-note{display:inline-block;font-family:'Press Start 2P',monospace;font-size:5px;padding:2px 6px;background:rgba(80,255,180,.12);border:1px solid rgba(80,255,180,.4);color:var(--green);letter-spacing:1px;margin-left:8px;vertical-align:middle;}
+  .optional-badge{display:inline-block;font-family:'Press Start 2P',monospace;font-size:5px;padding:2px 6px;background:rgba(255,200,80,.12);border:1px solid rgba(255,200,80,.4);color:var(--gold);letter-spacing:1px;vertical-align:middle;}
+  .consult-note{font-family:'Press Start 2P',monospace;font-size:5.5px;color:var(--pink);letter-spacing:1px;margin-top:14px;display:block;line-height:2;}
+
+  /* QUIZ */
+  #quiz{position:relative;z-index:2;padding:100px 48px;max-width:860px;margin:0 auto;}
+  .quiz-wrap{border:1px solid rgba(255,200,80,.3);background:linear-gradient(135deg,rgba(255,200,80,.04),rgba(255,80,200,.04));padding:48px 44px;position:relative;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));}
+  .quiz-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--pink),var(--blue));}
+  .quiz-step{display:none;}
+  .quiz-step.active{display:block;animation:fadeSlide .3s ease;}
+  @keyframes fadeSlide{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+  .quiz-q{font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.4;}
+  .quiz-sub{font-size:15px;color:var(--text-dim);margin-bottom:24px;line-height:1.6;}
+  .quiz-options{display:flex;flex-direction:column;gap:10px;}
+  .quiz-opt{font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:600;padding:13px 20px;border:1px solid rgba(255,80,200,.2);background:rgba(255,80,200,.04);color:var(--text);cursor:none;text-align:left;transition:all .2s;letter-spacing:.3px;width:100%;}
+  .quiz-opt:hover{border-color:var(--pink);background:rgba(255,80,200,.1);box-shadow:0 0 12px var(--pink-glow);transform:translateX(5px);}
+  .quiz-opt.selected{border-color:var(--gold);background:rgba(255,200,80,.12);color:var(--gold);box-shadow:0 0 12px var(--gold-glow);}
+  .quiz-progress{display:flex;gap:6px;margin-bottom:28px;align-items:center;}
+  .qp-dot{width:20px;height:4px;background:rgba(255,255,255,.1);transition:background .3s;}
+  .qp-dot.done{background:var(--pink);}
+  .qp-dot.current{background:var(--gold);box-shadow:0 0 6px var(--gold-glow);}
+  .quiz-step-label{font-family:'Press Start 2P',monospace;font-size:6px;color:var(--text-dim);margin-left:10px;letter-spacing:1px;}
+  .quiz-next{font-family:'Press Start 2P',monospace;font-size:8px;padding:13px 26px;background:linear-gradient(90deg,var(--pink),#c030a0);color:#fff;border:none;cursor:none;letter-spacing:2px;margin-top:20px;transition:transform .2s,box-shadow .2s;box-shadow:0 0 16px var(--pink-glow);clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);display:none;}
+  .quiz-next:hover{transform:translateY(-2px);box-shadow:0 0 24px var(--pink-glow);}
+  .quiz-result{display:none;text-align:center;padding:16px 0;}
+  .result-season{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(22px,4vw,42px);margin-bottom:6px;line-height:1.2;background:linear-gradient(90deg,var(--pink-light),var(--gold),var(--blue-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .result-subtitle{font-family:'Press Start 2P',monospace;font-size:7px;color:var(--text-dim);letter-spacing:3px;margin-bottom:20px;}
+  .result-colors{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0 20px;}
+  .result-swatch{width:36px;height:36px;border-radius:50%;box-shadow:0 0 10px rgba(255,255,255,.15);}
+  .result-body{font-size:16px;color:var(--text-dim);line-height:1.75;max-width:620px;margin:0 auto 12px;text-align:left;}
+  .result-body strong{color:rgba(232,216,255,.9);font-weight:700;}
+  .result-disclaimer{font-family:'Press Start 2P',monospace;font-size:6.5px;color:var(--gold);letter-spacing:1px;line-height:2;padding:16px 20px;border:1px solid rgba(255,200,80,.3);background:rgba(255,200,80,.06);margin:20px 0;text-align:center;}
+  .result-cta{font-family:'Press Start 2P',monospace;font-size:8px;padding:14px 28px;background:linear-gradient(90deg,var(--pink),#c030a0);color:#fff;text-decoration:none;letter-spacing:2px;display:inline-block;margin-top:4px;box-shadow:0 0 20px var(--pink-glow);clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);cursor:none;border:none;transition:transform .2s;}
+  .result-cta:hover{transform:translateY(-3px);}
+  .quiz-restart{font-family:'Press Start 2P',monospace;font-size:7px;padding:10px 20px;background:transparent;color:var(--text-dim);border:1px solid rgba(255,255,255,.1);cursor:none;letter-spacing:2px;margin-top:12px;margin-left:12px;transition:all .2s;display:inline-block;}
+  .quiz-restart:hover{color:var(--pink-light);border-color:var(--pink);}
+
+  /* GALLERY */
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,220px);gap:12px;}
+  .gi{position:relative;overflow:hidden;border:1px solid rgba(255,80,200,.15);background:linear-gradient(135deg,var(--bg2),var(--bg3));transition:transform .3s,border-color .3s;cursor:none;}
+  .gi:hover{border-color:var(--pink);transform:scale(1.02);z-index:5;box-shadow:0 0 30px var(--pink-glow);}
+  .gi.lg{grid-column:span 2;grid-row:span 2;}
+  .gi.tl{grid-row:span 2;}
+  .gi img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9;transition:opacity .3s;}
+  .gi:hover img{opacity:1;}
+  .gph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;}
+  .gemoji{font-size:40px;filter:drop-shadow(0 0 10px var(--pink-glow));}
+  .glabel{font-family:'Press Start 2P',monospace;font-size:6px;color:var(--text-dim);letter-spacing:2px;text-align:center;}
+  .gov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,80,200,.15),rgba(80,180,255,.15));opacity:0;transition:opacity .3s;display:flex;align-items:center;justify-content:center;}
+  .gi:hover .gov{opacity:1;}
+  .govt{font-family:'Press Start 2P',monospace;font-size:7px;color:#fff;letter-spacing:2px;text-shadow:0 0 10px rgba(255,80,200,.8);}
+  .gallery-note{font-family:'Press Start 2P',monospace;font-size:6px;color:rgba(255,200,80,.6);letter-spacing:1.5px;text-align:center;margin-top:20px;line-height:2;}
+
+  /* INSTAGRAM */
+  #instagram{position:relative;z-index:2;padding:80px 48px 100px;max-width:1200px;margin:0 auto;text-align:center;}
+  .ig-follow-btn{display:inline-flex;align-items:center;gap:10px;font-family:'Press Start 2P',monospace;font-size:8px;padding:14px 28px;border:1px solid rgba(255,80,200,.4);color:var(--pink-light);text-decoration:none;letter-spacing:2px;background:rgba(255,80,200,.06);transition:all .3s;margin-top:28px;}
+  .ig-follow-btn:hover{border-color:var(--pink);background:rgba(255,80,200,.14);box-shadow:0 0 20px var(--pink-glow);transform:translateY(-2px);}
+
+  /* CONTACT */
+  .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+  .cinfo{display:flex;flex-direction:column;gap:24px;}
+  .cblock{padding:24px;border:1px solid rgba(255,80,200,.15);background:rgba(255,80,200,.04);clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:border-color .3s,box-shadow .3s;}
+  .cblock:hover{border-color:var(--pink);box-shadow:0 0 20px var(--pink-glow);}
+  .cblock.bl{border-color:rgba(80,180,255,.15);background:rgba(80,180,255,.04);}
+  .cblock.bl:hover{border-color:var(--blue);box-shadow:0 0 20px var(--blue-glow);}
+  .cil{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+  .cico{font-size:20px;}
+  .ctype{font-family:'Press Start 2P',monospace;font-size:6px;color:var(--pink);letter-spacing:2px;}
+  .cblock.bl .ctype{color:var(--blue-light);}
+  .cval{font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:#fff;letter-spacing:1px;}
+  .srow{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap;}
+  .sbtn{font-family:'Press Start 2P',monospace;font-size:6px;padding:10px 14px;border:1px solid rgba(80,180,255,.3);color:var(--blue-light);text-decoration:none;letter-spacing:1px;transition:all .2s;background:rgba(80,180,255,.05);display:flex;align-items:center;gap:8px;}
+  .sbtn:hover{border-color:var(--blue);background:rgba(80,180,255,.12);box-shadow:0 0 16px var(--blue-glow);transform:translateY(-2px);cursor:none;}
+  .cform{display:flex;flex-direction:column;gap:16px;}
+  .fg{display:flex;flex-direction:column;gap:6px;}
+  .flabel{font-family:'Press Start 2P',monospace;font-size:6px;color:var(--text-dim);letter-spacing:2px;}
+  .finput,.ftextarea,.fselect{background:rgba(255,80,200,.05);border:1px solid rgba(255,80,200,.2);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;padding:12px 16px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%;}
+  .finput{clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);}
+  .finput:focus,.ftextarea:focus,.fselect:focus{border-color:var(--pink);box-shadow:0 0 12px var(--pink-glow);}
+  .ftextarea{resize:vertical;min-height:100px;}
+  .fselect{appearance:none;-webkit-appearance:none;cursor:none;}
+  .fbtn{font-family:'Press Start 2P',monospace;font-size:8px;padding:16px;background:linear-gradient(90deg,var(--pink),#c030a0);color:#fff;border:none;cursor:none;letter-spacing:2px;transition:transform .2s,box-shadow .2s;box-shadow:0 0 20px var(--pink-glow);clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);width:100%;}
+  .fbtn:hover{transform:translateY(-3px);box-shadow:0 0 30px var(--pink-glow);}
+  .fbtn:disabled{opacity:.6;transform:none;}
+  .fsuccess{display:none;font-family:'Press Start 2P',monospace;font-size:7px;color:var(--blue-light);text-align:center;padding:20px;border:1px solid var(--blue);background:rgba(80,180,255,.08);letter-spacing:1px;line-height:2;}
+  .ferror{display:none;font-family:'Press Start 2P',monospace;font-size:7px;color:#ff6060;text-align:center;padding:16px;border:1px solid rgba(255,80,80,.4);background:rgba(255,80,80,.08);letter-spacing:1px;line-height:1.8;}
+
+  footer{position:relative;z-index:2;text-align:center;padding:40px 24px 90px;border-top:1px solid rgba(255,80,200,.1);}
+  .flogo{font-family:'Orbitron',monospace;font-weight:900;font-size:18px;background:linear-gradient(90deg,var(--pink-light),#fff,var(--blue-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;}
+  .fsub{font-family:'Press Start 2P',monospace;font-size:6px;color:var(--text-dim);letter-spacing:3px;}
+
+  .stars{position:fixed;inset:0;pointer-events:none;z-index:0;}
+  .star{position:absolute;width:2px;height:2px;background:white;border-radius:0;animation:twinkle var(--d) ease-in-out infinite var(--delay);}
+  @keyframes twinkle{0%,100%{opacity:var(--max-op);}50%{opacity:.1;}}
+  .fade-in{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .color-hero-inner{grid-template-columns:1fr;}
+    .cgrid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+    .gi.lg{grid-column:span 2;grid-row:span 1;}.gi.tl{grid-row:span 1;}
+  }
+  @media(max-width:768px){
+    nav{padding:14px 16px;}.nav-links{gap:12px;}
+    .sw{padding:80px 20px;}
+    #quiz,#instagram{padding:80px 20px;}
+    .btn-secondary{margin-left:0;margin-top:12px;}
+    .hero-btns{display:flex;flex-direction:column;align-items:center;gap:12px;}
+    .mission{padding:20px;}.mission-text{font-size:16px;}
+    .quiz-wrap{padding:28px 20px;}
+    .level-up-btn{bottom:20px;right:20px;font-size:7px;padding:12px 16px;}
+    .nav-links a{font-size:5.5px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+<div class="grid-bg"></div>
+<div class="scanlines"></div>
+<div class="stars" id="stars"></div>
+<a href="#contact" class="level-up-btn">✦ LEVEL UP HERE</a>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">CC64</a>
+  <ul class="nav-links">
+    <li><a href="#home">HOME</a></li>
+    <li><a href="#services">SERVICES</a></li>
+    <li><a href="#quiz">COLOR QUIZ</a></li>
+    <li><a href="#gallery">GALLERY</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-orb orb-pink"></div>
+  <div class="hero-orb orb-blue"></div>
+  <div>
+    <div class="hero-badge">✦ INSERT COIN TO BEGIN ✦</div>
+    <h1 class="hero-title">CHEATCODES</h1>
+    <h1 class="hero-title-2">64</h1>
+    <div class="mission">
+      <p class="mission-text">
+        <em>Beauty is already in you.</em> Our mission is to help every person who ever felt awkward about wanting to feel pretty, who didn't have someone to ask, and who didn't know where to start. We've been there. Come to me with anything! I'll be the one to look at you and see exactly what's already there, and help you become <em>the most beautiful version of yourself.</em>
+      </p>
+    </div>
+    <div class="hero-chips">
+      <span class="hchip hchip-gold">✦ Color Specialist</span>
+      <span class="hchip hchip-pink">✦ Facials</span>
+      <span class="hchip hchip-blue">✦ Wigs</span>
+      <span class="hchip hchip-green">✦ Protective Styles</span>
+      <span class="hchip hchip-pink">✦ Cuts</span>
+      <span class="hchip hchip-gold">✦ Disaster Fix</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary">VIEW SERVICES</a>
+      <a href="#contact" class="btn-secondary">CONTACT ME</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>SCROLL</span><div class="scroll-arrow"></div></div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SERVICES -->
+<div class="sw" id="services">
+  <div class="section-header fade-in">
+    <span class="section-eyebrow">▶ SELECT YOUR POWER-UP</span>
+    <h2 class="section-title">SERVICES & PRICING</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="price-disclaimer fade-in">⚠ ALL PRICES ARE SUBJECT TO CONSULTATION</div>
+
+  <div class="services-grid">
+
+    <!-- COLOR SPECIALIST — full width featured -->
+    <div class="service-card color-hero card-featured fade-in">
+      <div class="expert-badge">✦ SIGNATURE EXPERTISE ✦</div>
+      <div class="sname"><span class="sstar">✦</span> COLOR SPECIALIST & COLOR ANALYSIS</div>
+      <p class="sdesc">Color is my language. My specialty is <em>extracting the beauty already living in you</em> — working with your natural features, not against them. Every color choice I make is built around <em>who you already are.</em></p>
+      <div class="color-hero-inner">
+        <div>
+          <p style="font-family:'Press Start 2P',monospace;font-size:7px;color:var(--gold);letter-spacing:2px;margin-bottom:16px;">YOUR COLOR ANALYSIS INCLUDES:</p>
+          <div class="color-analysis-items">
+            <div class="ca-item"><span class="ca-label">UNDERTONE</span><span class="ca-desc">Warm, cool, or neutral — we find what lights your skin up from the inside.</span></div>
+            <div class="ca-item"><span class="ca-label">CONTRAST</span><span class="ca-desc">How bold or soft your coloring is, and what level of drama suits you best.</span></div>
+            <div class="ca-item"><span class="ca-label">HUE</span><span class="ca-desc">The color family that naturally harmonizes with your features.</span></div>
+            <div class="ca-item"><span class="ca-label">VALUE</span><span class="ca-desc">Your ideal hair depth — from lightest blonde to deepest black and everything between.</span></div>
+            <div class="ca-item"><span class="ca-label">CHROMA</span><span class="ca-desc">The richness and intensity of color your features can carry beautifully.</span></div>
+          </div>
+          <p style="font-size:14px;color:var(--text-dim);margin-top:16px;line-height:1.7;">Once we know your color profile, I'll build your <em style="color:rgba(232,216,255,.9);font-style:normal;font-weight:600;">dream color</em> around the beauty you already have — not a trend, not a guess. <em style="color:rgba(232,216,255,.9);font-style:normal;font-weight:600;">Yours.</em></p>
+        </div>
+        <div>
+          <span class="service-section-label">✦ COLORING SERVICES</span>
+          <div class="sprices">
+            <div class="prow"><span>Single Process Color</span><span class="pamt">$110</span></div>
+            <div class="prow"><span>Full Highlights</span><span class="pamt">$185</span></div>
+            <div class="prow"><span>Balayage / Ombré</span><span class="pamt">$220</span></div>
+            <div class="prow"><span>Color Correction</span><span class="pamt">$250+</span></div>
+            <div class="prow"><span>Vivid / Fashion Color</span><span class="pamt">$200+</span></div>
+            <div class="prow"><span>Gloss / Toner</span><span class="pamt">$65</span></div>
+            <div class="prow"><span>Wig Custom Color</span><span class="pamt">$175+</span></div>
+          </div>
+
+          <div class="service-divider-line"></div>
+
+          <span class="service-section-label">✦ CHEMICAL TREATMENTS</span>
+          <div class="sprices">
+            <div class="prow"><span>Relaxer</span><span class="pamt">$120</span></div>
+            <div class="prow"><span>Perm</span><span class="pamt">$150</span></div>
+            <div class="prow"><span>Keratin Treatment</span><span class="pamt">$200</span></div>
+          </div>
+
+          <span class="consult-note">✦ I can color any wig into any shade you dream of — that's my specialty.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FACIALS -->
+    <div class="service-card ba fade-in">
+      <div class="sname"><span class="sstar">✦</span> FACIALS</div>
+      <p class="sdesc">Your skin is already beautiful — sometimes it just needs someone to <em>extract what's hiding underneath.</em> Every facial is customized to what your skin is asking for.</p>
+      <div class="sprices">
+        <div class="prow"><span>Classic Facial (60min)</span><span class="pamt">$130</span></div>
+        <div class="prow"><span>Deep Cleanse</span><span class="pamt">$155</span></div>
+        <div class="prow"><span>Brightening Facial</span><span class="pamt">$165</span></div>
+        <div class="prow"><span>Chemical Peel</span><span class="pamt">$185</span></div>
+        <div class="prow"><span>Add-On Mask</span><span class="pamt">$30</span></div>
+      </div>
+    </div>
+
+    <!-- WIGS -->
+    <div class="service-card fade-in">
+      <div class="sname"><span class="sstar">✦</span> WIGS</div>
+      <p class="sdesc">Install, customize & transform. I can take a wig and make it <em>any color you want</em> — that is my specialty. Braid down is <em>always included</em> with every wig purchase.</p>
+      <div class="sprices">
+        <div class="prow"><span>Lace Front Install <span class="included-note">BRAID DOWN INCL.</span></span><span class="pamt">$150</span></div>
+        <div class="prow"><span>Full Lace Install <span class="included-note">BRAID DOWN INCL.</span></span><span class="pamt">$200</span></div>
+        <div class="prow"><span>Custom Unit (labor)</span><span class="pamt">$250+</span></div>
+        <div class="prow"><span>Wig Styling</span><span class="pamt">$85</span></div>
+        <div class="prow"><span>Knot Bleach & Pluck</span><span class="pamt">$75</span></div>
+        <div class="prow"><span>Custom Color on Wig</span><span class="pamt">$175+</span></div>
+      </div>
+    </div>
+
+    <!-- PROTECTIVE STYLES -->
+    <div class="service-card gra fade-in">
+      <div class="sname"><span class="sstar">✦</span> PROTECTIVE STYLES</div>
+      <p class="sdesc">Low-tension, natural hair protective styles designed to <em>protect your hair and edges.</em> Specializing in styles that work <em>with your natural hair</em> — not against it.</p>
+      <div class="sprices">
+        <div class="prow"><span>Flat Twists</span><span class="pamt">$85</span></div>
+        <div class="prow"><span>Two-Strand Twists</span><span class="pamt">$95</span></div>
+        <div class="prow"><span>Cornrows / Feed-In</span><span class="pamt">$65–$95</span></div>
+        <div class="prow"><span>Low-Tension (under wig)</span><span class="pamt">$60</span></div>
+        <div class="prow"><span>Natural Hair Updo</span><span class="pamt">$75</span></div>
+      </div>
+    </div>
+
+    <!-- HAIRCUTTING -->
+    <div class="service-card ba fade-in">
+      <div class="sname"><span class="sstar">✦</span> HAIRCUTTING</div>
+      <p class="sdesc">Precision cuts and styles tailored to your face shape, texture, and vibe.</p>
+      <div class="sprices">
+        <div class="prow"><span>Women's Cut & Style</span><span class="pamt">$95</span></div>
+        <div class="prow"><span>Men's Cut</span><span class="pamt">$55</span></div>
+        <div class="prow"><span>Dusting / Trim</span><span class="pamt">$45</span></div>
+        <div class="prow"><span>Wash, Cut & Blowout</span><span class="pamt">$120</span></div>
+        <div class="prow"><span>Bang Trim</span><span class="pamt">$25</span></div>
+      </div>
+    </div>
+
+    <!-- DISASTER FIX -->
+    <div class="service-card ga fade-in">
+      <div class="sname"><span class="sstar">✦</span> DISASTER FIX</div>
+      <p class="sdesc">Bad color job? Botched install? I'm the person you come to when someone else got it wrong. No judgment — <em>just results.</em></p>
+      <div class="sprices">
+        <div class="prow"><span>Color Correction SOS</span><span class="pamt">$250+</span></div>
+        <div class="prow"><span>Wig Emergency Rescue</span><span class="pamt">$120</span></div>
+        <div class="prow"><span>Skin SOS Treatment</span><span class="pamt">$100</span></div>
+        <div class="prow"><span>Style Emergency Fix</span><span class="pamt">$85</span></div>
+      </div>
+    </div>
+
+    <!-- EXTENSIONS — COMING SOON -->
+    <div class="service-card coming fade-in">
+      <div class="coming-badge">⏳ COMING SOON</div>
+      <div class="sname"><span class="sstar">✦</span> EXTENSIONS</div>
+      <p class="sdesc">Length, volume, and everything in between — <em>coming soon.</em> Stay locked in on Instagram for the announcement.</p>
+      <div class="sprices">
+        <div class="prow"><span>Tape-In Extensions</span><span class="pamt">TBA</span></div>
+        <div class="prow"><span>I-Tip / K-Tip</span><span class="pamt">TBA</span></div>
+        <div class="prow"><span>Sew-In Weft</span><span class="pamt">TBA</span></div>
+        <div class="prow"><span>Clip-In Install</span><span class="pamt">TBA</span></div>
+      </div>
+    </div>
+
+    <!-- BEAUTY EVALUATION -->
+    <div class="service-card special card-featured fade-in">
+      <div class="sname"><span class="sstar">✦</span> INITIAL BEAUTY EVALUATION <span class="optional-badge">OPTIONAL</span></div>
+      <p class="sdesc">Not sure where to start? Book a personal evaluation and I will sit with you, look at you, and tell you <em>exactly what you need to become your most beautiful self.</em> We'll go over your undertones, your features, your hair, your skin — everything. This isn't generic. This is <em>specific to you.</em><br><br><em>The $50 evaluation fee will be applied as a credit toward any service you book.</em></p>
+      <div class="sprices">
+        <div class="prow"><span>Initial Beauty Evaluation</span><span class="pamt">$50 <span style="font-size:11px;color:var(--green);font-family:'Rajdhani',sans-serif;font-weight:600;">(credited toward your service)</span></span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- COLOR QUIZ -->
+<div id="quiz">
+  <div class="section-header fade-in">
+    <span class="section-eyebrow">▶ FIND YOUR PALETTE</span>
+    <h2 class="section-title">WHAT'S YOUR COLOR SEASON?</h2>
+    <div class="section-line"></div>
+    <p style="font-size:16px;color:var(--text-dim);margin-top:16px;line-height:1.7;max-width:600px;margin-left:auto;margin-right:auto;">Answer 5 quick questions for a fun peek at your color season. There are actually 12–16 seasons in a full analysis — we'll go over your real results in person!</p>
+  </div>
+
+  <div class="quiz-wrap fade-in">
+    <div class="quiz-progress" id="quizProgress">
+      <div class="qp-dot current" id="dot0"></div>
+      <div class="qp-dot" id="dot1"></div>
+      <div class="qp-dot" id="dot2"></div>
+      <div class="qp-dot" id="dot3"></div>
+      <div class="qp-dot" id="dot4"></div>
+      <span class="quiz-step-label" id="stepLabel">QUESTION 1 OF 5</span>
+    </div>
+
+    <!-- Q1: UNDERTONE via vein test -->
+    <div class="quiz-step active" id="step0">
+      <div class="quiz-q">Look at your inner wrist in natural light. Your veins appear...</div>
+      <div class="quiz-sub">The vein test is one of the most reliable ways to read your undertone.</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="pick(this,0,'warm')">Greenish — they look more green than blue</button>
+        <button class="quiz-opt" onclick="pick(this,0,'cool')">Blue or purple — clearly cool-toned</button>
+        <button class="quiz-opt" onclick="pick(this,0,'neutral')">A mix of both — I honestly can't tell</button>
+      </div>
+      <button class="quiz-next" id="next0" onclick="go(0)">NEXT ✦</button>
+    </div>
+
+    <!-- Q2: DEPTH -->
+    <div class="quiz-step" id="step1">
+      <div class="quiz-q">How would you describe the overall depth of your natural coloring?</div>
+      <div class="quiz-sub">Think about your skin, natural hair, and eyes together as one picture.</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="pick(this,1,'deep')">Deep and rich — everything reads dark and bold</button>
+        <button class="quiz-opt" onclick="pick(this,1,'medium')">Medium — somewhere in the middle</button>
+        <button class="quiz-opt" onclick="pick(this,1,'light')">Light and fair — everything reads soft and pale</button>
+      </div>
+      <button class="quiz-next" id="next1" onclick="go(1)">NEXT ✦</button>
+    </div>
+
+    <!-- Q3: CHROMA — does person look better in muted or clear -->
+    <div class="quiz-step" id="step2">
+      <div class="quiz-q">When you wear a pure, bright color like true red or cobalt blue near your face...</div>
+      <div class="quiz-sub">Be honest — you don't have to love bold colors, just notice what your skin does.</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="pick(this,2,'clear')">My skin looks alive and bright — clear colors energize my face</button>
+        <button class="quiz-opt" onclick="pick(this,2,'soft')">It feels like too much — muted, softer tones suit me much better</button>
+        <button class="quiz-opt" onclick="pick(this,2,'medium')">Depends on the color — I need the right shade, not too harsh or too dull</button>
+      </div>
+      <button class="quiz-next" id="next2" onclick="go(2)">NEXT ✦</button>
+    </div>
+
+    <!-- Q4: CONTRAST -->
+    <div class="quiz-step" id="step3">
+      <div class="quiz-q">The contrast between your skin tone and natural hair/brows is...</div>
+      <div class="quiz-sub">Stand in front of a mirror and look at how your hair meets your face naturally.</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="pick(this,3,'high')">High — my hair is dramatically darker or lighter than my skin, very striking</button>
+        <button class="quiz-opt" onclick="pick(this,3,'medium')">Medium — there's a difference but it blends somewhat</button>
+        <button class="quiz-opt" onclick="pick(this,3,'low')">Low — my hair and skin are close in tone, everything blends together</button>
+      </div>
+      <button class="quiz-next" id="next3" onclick="go(3)">NEXT ✦</button>
+    </div>
+
+    <!-- Q5: COLOR REACTION — this is now the spring-specific differentiator -->
+    <div class="quiz-step" id="step4">
+      <div class="quiz-q">Imagine holding these colors up to your face. Which group makes your skin glow most?</div>
+      <div class="quiz-sub">Go with your gut — which one makes you think "yes, that's me."</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="pick(this,4,'spring-bright')">Warm & vivid: peach, coral, golden yellow, warm pink, bright warm orange — I look fresh and glowing</button>
+        <button class="quiz-opt" onclick="pick(this,4,'spring-light')">Warm & delicate: ivory, light peach, champagne, soft warm blush — I look luminous in light tones</button>
+        <button class="quiz-opt" onclick="pick(this,4,'autumn-deep')">Warm & earthy: terracotta, chocolate, burnt orange, deep olive, caramel — I look rich and grounded</button>
+        <button class="quiz-opt" onclick="pick(this,4,'autumn-soft')">Warm & muted: dusty peach, warm beige, muted gold, soft camel — I glow in soft, earthy tones</button>
+        <button class="quiz-opt" onclick="pick(this,4,'winter-deep')">Cool & bold: true red, cobalt blue, deep plum, crisp white, black — I look striking and sharp</button>
+        <button class="quiz-opt" onclick="pick(this,4,'summer-soft')">Cool & gentle: dusty rose, soft lavender, mauve, powder blue, grey — I glow in soft cool tones</button>
+      </div>
+      <button class="quiz-next" id="next4" onclick="go(4)">SEE MY SEASON ✦</button>
+    </div>
+
+    <!-- RESULT -->
+    <div class="quiz-result" id="quizResult">
+      <div class="result-season" id="resultSeason"></div>
+      <div class="result-subtitle" id="resultSubtitle"></div>
+      <div class="result-colors" id="resultSwatches"></div>
+      <div class="result-body" id="resultBody"></div>
+      <div class="result-disclaimer">
+        ✦ This is just for fun — not a full diagnosis!<br>
+        Color analysis has 12–16 seasons with many nuances.<br>
+        Your <strong style="color:#fff;">real results</strong> need to be done in person.<br>
+        Book your evaluation and let's find your true season together.
+      </div>
+      <a href="#contact" class="result-cta">✦ BOOK YOUR COLOR ANALYSIS</a>
+      <button class="quiz-restart" onclick="restartQuiz()">↺ RETAKE QUIZ</button>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- GALLERY -->
+<div class="sw" id="gallery">
+  <div class="section-header fade-in">
+    <span class="section-eyebrow">▶ THE PORTFOLIO</span>
+    <h2 class="section-title">GALLERY</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="gallery-grid fade-in">
+    <div class="gi lg">
+      <div class="gph"><span class="gemoji">🎨</span><span class="glabel">YOUR BEST WORK HERE</span></div>
+      <div class="gov"><span class="govt">VIEW</span></div>
+    </div>
+    <div class="gi tl">
+      <div class="gph"><span class="gemoji">👑</span><span class="glabel">WIG INSTALL</span></div>
+      <div class="gov"><span class="govt">VIEW</span></div>
+    </div>
+    <div class="gi">
+      <div class="gph"><span class="gemoji">💆</span><span class="glabel">FACIAL GLOW</span></div>
+      <div class="gov"><span class="govt">VIEW</span></div>
+    </div>
+    <div class="gi">
+      <div class="gph"><span class="gemoji">✨</span><span class="glabel">COLOR WORK</span></div>
+      <div class="gov"><span class="govt">VIEW</span></div>
+    </div>
+    <div class="gi">
+      <div class="gph"><span class="gemoji">⚡</span><span class="glabel">BEFORE & AFTER</span></div>
+      <div class="gov"><span class="govt">VIEW</span></div>
+    </div>
+    <div class="gi">
+      <div class="gph"><span class="gemoji">✦</span><span class="glabel">THE VIBE</span></div>
+      <div class="gov"><span class="govt">VIEW</span></div>
+    </div>
+  </div>
+  <p class="gallery-note fade-in">
+    ✦ TO ADD YOUR PHOTOS: find each &lt;div class="gph"&gt; block and replace it with &lt;img src="yourphoto.jpg" alt="description"&gt;
+  </p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- INSTAGRAM -->
+<div id="instagram">
+  <div class="section-header fade-in">
+    <span class="section-eyebrow">▶ FOLLOW THE JOURNEY</span>
+    <h2 class="section-title">@CHEATCODES64</h2>
+    <div class="section-line"></div>
+    <p style="font-size:16px;color:var(--text-dim);margin-top:16px;line-height:1.7;">See the latest transformations, color inspo, and behind-the-scenes on Instagram.</p>
+  </div>
+  <a href="https://www.instagram.com/cheatcodes64" target="_blank" rel="noopener noreferrer" class="ig-follow-btn fade-in">
+    📸 &nbsp;FOLLOW @CHEATCODES64 ON INSTAGRAM
+  </a>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- CONTACT -->
+<div class="sw" id="contact" style="max-width:900px;">
+  <div class="section-header fade-in">
+    <span class="section-eyebrow">▶ PLAYER 2 ENTER</span>
+    <h2 class="section-title">GET IN TOUCH</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="cgrid fade-in">
+    <div class="cinfo">
+      <div class="cblock">
+        <div class="cil"><span class="cico">📱</span><span class="ctype">PHONE / TEXT</span></div>
+        <div class="cval">929-548-4154</div>
+      </div>
+      <div class="cblock bl">
+        <div class="cil"><span class="cico">📍</span><span class="ctype">LOCATION</span></div>
+        <div class="cval">NYC, New York</div>
+      </div>
+      <div class="cblock">
+        <div class="cil"><span class="cico">🕹️</span><span class="ctype">FOLLOW ME</span></div>
+        <div class="srow">
+          <a href="https://www.instagram.com/cheatcodes64" target="_blank" rel="noopener noreferrer" class="sbtn">📸 INSTAGRAM</a>
+        </div>
+        <div style="margin-top:12px;font-family:'Press Start 2P',monospace;font-size:7px;color:var(--pink-light);">@cheatcodes64</div>
+      </div>
+    </div>
+
+    <!-- FORMSPREE — live and ready -->
+    <form class="cform" id="contactForm" action="https://formspree.io/f/xqeyrojl" method="POST">
+      <div class="fg"><label class="flabel">YOUR NAME</label><input class="finput" type="text" name="name" placeholder="Enter your name..." required></div>
+      <div class="fg"><label class="flabel">PHONE / EMAIL</label><input class="finput" type="text" name="contact" placeholder="How to reach you..." required></div>
+      <div class="fg">
+        <label class="flabel">SERVICE INTEREST</label>
+        <select class="fselect" name="service">
+          <option value="" disabled selected>Select a service...</option>
+          <option>Color Specialist</option>
+          <option>Color Analysis</option>
+          <option>Facials</option>
+          <option>Wigs</option>
+          <option>Custom Wig Color</option>
+          <option>Protective Styles</option>
+          <option>Haircutting</option>
+          <option>Chemical Treatment (Relaxer / Perm / Keratin)</option>
+          <option>Disaster Fix</option>
+          <option>Extensions (Coming Soon — Notify Me)</option>
+          <option>Beauty Evaluation ($50 — credited to service)</option>
+          <option>Multiple Services</option>
+        </select>
+      </div>
+      <div class="fg"><label class="flabel">MESSAGE</label><textarea class="ftextarea" name="message" placeholder="Tell me what you need..."></textarea></div>
+      <button type="submit" class="fbtn" id="submitBtn">✦ LEVEL UP HERE</button>
+      <div class="fsuccess" id="formSuccess">✦ MESSAGE SENT!<br><br>I'LL HIT YOU BACK SOON 🎮</div>
+      <div class="ferror" id="formError">✗ SOMETHING WENT WRONG<br><br>TEXT ME AT 929-548-4154</div>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="flogo">CHEATCODES 64</div>
+  <div class="fsub" style="margin-top:8px;">BEAUTY. UNLOCKED. &nbsp;✦&nbsp; NYC, NEW YORK</div>
+  <div class="fsub" style="margin-top:8px;"><a href="https://www.instagram.com/cheatcodes64" target="_blank" rel="noopener noreferrer" style="color:var(--pink-light);text-decoration:none;">@CHEATCODES64</a></div>
+  <div class="fsub" style="margin-top:16px;font-size:5px;opacity:.4;">© 2025 CHEATCODES 64 · ALL RIGHTS RESERVED</div>
+</footer>
+
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const trail  = document.getElementById('cursorTrail');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX+'px'; cursor.style.top = e.clientY+'px';
+    setTimeout(()=>{ trail.style.left = e.clientX+'px'; trail.style.top = e.clientY+'px'; },80);
+  });
+
+  // STARS
+  const se = document.getElementById('stars');
+  for(let i=0;i<80;i++){
+    const s=document.createElement('div');s.classList.add('star');
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${(Math.random()*3+1.5).toFixed(1)}s;--delay:${(Math.random()*4).toFixed(1)}s;--max-op:${(Math.random()*.5+.2).toFixed(2)};`;
+    se.appendChild(s);
+  }
+
+  // FADE IN
+  const obs = new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.08});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+  // FORM — live Formspree
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled=true; btn.textContent='... SENDING';
+    try{
+      const res = await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+      if(res.ok){
+        btn.style.display='none';
+        document.getElementById('formSuccess').style.display='block';
+        form.reset();
+        setTimeout(()=>{document.getElementById('formSuccess').style.display='none';btn.style.display='block';btn.disabled=false;btn.textContent='✦ LEVEL UP HERE';},5000);
+      }else{throw new Error();}
+    }catch{
+      btn.disabled=false; btn.textContent='✦ LEVEL UP HERE';
+      document.getElementById('formError').style.display='block';
+      setTimeout(()=>{document.getElementById('formError').style.display='none';},5000);
+    }
+  });
+
+  // ── QUIZ — 12 seasons ──
+  const seasons = {
+    'bright_spring': { name:'🌸 BRIGHT SPRING',  sub:'WARM · VIVID · SPARKLING',   colors:['#FF6B8A','#FFB347','#FF8C42','#FFD700','#FF4F81'], body:'<strong>Your coloring is warm and vivid — you have a sparkling, fresh brightness.</strong> Clear, warm, saturated colors make you electric. Coral, bright warm pink, golden yellow, peach, and clear orange are extraordinary on you.<br><br><strong>Best hair levels:</strong> Golden blonde, strawberry blonde, bright copper. Warm, clear, and glowing.' },
+    'true_spring':   { name:'🌷 TRUE SPRING',    sub:'WARM · CLEAR · FRESH',       colors:['#FFA07A','#FFD700','#FFDAB9','#F4A460','#FF8247'], body:'<strong>Your coloring is warm, clear, and beautifully fresh.</strong> Peach, coral, warm ivory, golden yellow, and light caramel glow beautifully on you.<br><br><strong>Best hair levels:</strong> Honey blonde, warm light brown, golden highlights. Avoid anything dark or ashy.' },
+    'light_spring':  { name:'🌼 LIGHT SPRING',   sub:'WARM · LIGHT · DELICATE',    colors:['#FFDAB9','#FFE4C4','#F5DEB3','#FFDEAD','#FFF0AA'], body:'<strong>Your coloring is warm, light, and delicately luminous.</strong> Creamy ivory, champagne, soft peach, and light gold bring out your natural glow without overpowering you.<br><br><strong>Best hair levels:</strong> Lightest blonde to light golden brown. Keep everything airy and soft.' },
+    'deep_autumn':   { name:'🍂 DEEP AUTUMN',    sub:'WARM · RICH · EARTHY',       colors:['#6B3A2A','#A0522D','#C47B3E','#8B6914','#3D2B1F'], body:'<strong>Your coloring is warm, deep, and richly saturated.</strong> Deep terracottas, rich chocolates, burnt oranges, warm olive greens, and golden browns make you radiate.<br><br><strong>Best hair levels:</strong> Deep chocolate, rich auburn, warm chestnut, dark copper. Avoid ashy or cool tones.' },
+    'true_autumn':   { name:'🍁 TRUE AUTUMN',    sub:'WARM · GOLDEN · GROUNDED',   colors:['#B5651D','#D2691E','#C8913A','#8B7355','#4E3B28'], body:'<strong>Your coloring is golden-warm and grounded.</strong> Warm caramels, mustard golds, brick reds, and deep olive look stunning on you.<br><br><strong>Best hair levels:</strong> Golden brown, auburn, warm medium brown, honey highlights. Keep it toasty.' },
+    'soft_autumn':   { name:'🌾 SOFT AUTUMN',    sub:'WARM · MUTED · GENTLE',      colors:['#C4A882','#B8957A','#A08060','#8B7D6B','#6B5E52'], body:'<strong>Your coloring is warm but soft — beautifully blended and naturally earthy.</strong> Camel, warm beige, dusty peach, and soft terracotta are your magic.<br><br><strong>Best hair levels:</strong> Soft warm brown, golden beige blonde, muted auburn. Avoid anything too vivid or high-contrast.' },
+    'deep_winter':   { name:'❄️ DEEP WINTER',    sub:'COOL · DEEP · DRAMATIC',     colors:['#1C1C2E','#8B0000','#000080','#2E0854','#191970'], body:'<strong>Your coloring is cool, deep, and strikingly dramatic.</strong> True black, deep jewel tones — burgundy, sapphire, deep plum, emerald — look breathtaking on you.<br><br><strong>Best hair levels:</strong> True black, deepest cool brown, or bold platinum. Cool and bold is your power.' },
+    'true_winter':   { name:'🌙 TRUE WINTER',    sub:'COOL · CLEAR · SHARP',       colors:['#000000','#FF0000','#FFFFFF','#0000CD','#800080'], body:'<strong>Your coloring is cool and crisp — clear and sharp with strong contrast.</strong> True red, crisp white, black, royal blue, and icy pink are electric on you.<br><br><strong>Best hair levels:</strong> True black or platinum. Contrast is everything for you.' },
+    'bright_winter': { name:'💫 BRIGHT WINTER',  sub:'COOL · BRIGHT · ELECTRIC',   colors:['#FF007F','#00CED1','#4169E1','#9400D3','#FFFFFF'], body:'<strong>Your coloring is cool and vivid — bright, clear, and electric.</strong> Hot pink, electric blue, bright violet, and icy contrasts make you absolutely stunning.<br><br><strong>Best hair levels:</strong> Deep cool brown to black, or platinum blonde. High contrast is key.' },
+    'true_summer':   { name:'🌊 TRUE SUMMER',    sub:'COOL · SOFT · ELEGANT',      colors:['#B0C4DE','#9370DB','#6B8E9F','#C8A2C8','#708090'], body:'<strong>Your coloring is cool and softly elegant.</strong> Dusty cool tones — mauve, soft lavender, rose taupe, powder blue — bring a beautiful sophistication to your look.<br><br><strong>Best hair levels:</strong> Ash blonde, cool light brown, smoky brunette. Avoid warm golds or coppers.' },
+    'soft_summer':   { name:'🌫️ SOFT SUMMER',   sub:'COOL · MUTED · ROMANTIC',    colors:['#C4AEBE','#B0A8B9','#9B8EA3','#A8B8C8','#8E9BA8'], body:'<strong>Your coloring is cool and muted — softly blended, romantic, and beautifully understated.</strong> Smoky lavender, dusty mauve, soft teal, and cool rose all look effortlessly beautiful on you.<br><br><strong>Best hair levels:</strong> Soft ash brown, muted cool blonde, or smoky brunette.' },
+    'light_summer':  { name:'🕊️ LIGHT SUMMER',  sub:'COOL · LIGHT · AIRY',        colors:['#E6E6FA','#D8BFD8','#B0E0E6','#DDA0DD','#C0C0C0'], body:'<strong>Your coloring is cool, light, and ethereally soft.</strong> Soft white, icy pink, pale lavender, and cool powder blue make you look angelic and luminous.<br><br><strong>Best hair levels:</strong> Lightest ash blonde or platinum. Keep everything pale, cool, and soft.' },
+  };
+
+  const answers = new Array(5).fill(null);
+  let currentStep = 0;
+
+  function pick(el, stepIdx, val){
+    el.closest('.quiz-options').querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('selected'));
+    el.classList.add('selected');
+    answers[stepIdx]=val;
+    document.getElementById('next'+stepIdx).style.display='inline-block';
+  }
+
+  function go(stepIdx){
+    if(answers[stepIdx]===null) return;
+    const dot=document.getElementById('dot'+stepIdx);
+    dot.classList.remove('current'); dot.classList.add('done');
+    document.getElementById('step'+stepIdx).classList.remove('active');
+    if(stepIdx<4){
+      currentStep=stepIdx+1;
+      document.getElementById('step'+currentStep).classList.add('active');
+      document.getElementById('dot'+currentStep).classList.add('current');
+      document.getElementById('stepLabel').textContent='QUESTION '+(currentStep+1)+' OF 5';
+    } else { showResult(); }
+  }
+
+  function showResult(){
+    document.getElementById('step4').classList.remove('active');
+    for(let i=0;i<5;i++){ const d=document.getElementById('dot'+i); d.classList.remove('current'); d.classList.add('done'); }
+    document.getElementById('stepLabel').textContent='YOUR SEASON ✦';
+
+    const tone     = answers[0]; // warm / cool / neutral
+    const depth    = answers[1]; // deep / medium / light
+    const chroma   = answers[2]; // clear / soft / medium
+    const contrast = answers[3]; // high / medium / low
+    const reaction = answers[4]; // spring-bright / spring-light / autumn-deep / autumn-soft / winter-deep / summer-soft
+
+    // Reaction is the strongest signal — use it as the primary driver,
+    // then refine with tone, depth, and chroma
+    let key;
+
+    if(reaction==='spring-bright'){
+      // Warm + vivid → Bright Spring (needs clear chroma) or True Spring
+      if(chroma==='clear' || depth==='light') key='bright_spring';
+      else key='true_spring';
+    } else if(reaction==='spring-light'){
+      key='light_spring';
+    } else if(reaction==='autumn-deep'){
+      if(depth==='deep') key='deep_autumn';
+      else key='true_autumn';
+    } else if(reaction==='autumn-soft'){
+      key='soft_autumn';
+    } else if(reaction==='winter-deep'){
+      if(chroma==='clear' && contrast==='high') key='bright_winter';
+      else if(depth==='deep') key='deep_winter';
+      else key='true_winter';
+    } else if(reaction==='summer-soft'){
+      if(depth==='light') key='light_summer';
+      else if(chroma==='soft') key='soft_summer';
+      else key='true_summer';
+    } else {
+      // fallback using tone/depth/chroma
+      const isWarm = tone==='warm';
+      if(isWarm && depth==='light') key='light_spring';
+      else if(isWarm && depth==='deep') key='deep_autumn';
+      else if(isWarm) key='true_autumn';
+      else if(depth==='light') key='light_summer';
+      else if(depth==='deep') key='deep_winter';
+      else key='soft_summer';
+    }
+
+    const s = seasons[key];
+    document.getElementById('resultSeason').textContent = s.name;
+    document.getElementById('resultSubtitle').textContent = s.sub;
+    document.getElementById('resultBody').innerHTML = s.body;
+    const sw = document.getElementById('resultSwatches');
+    sw.innerHTML='';
+    s.colors.forEach(c=>{ const d=document.createElement('div'); d.className='result-swatch'; d.style.background=c; sw.appendChild(d); });
+    document.getElementById('quizResult').style.display='block';
+  }
+
+  function restartQuiz(){
+    answers.fill(null); currentStep=0;
+    document.getElementById('quizResult').style.display='none';
+    for(let i=0;i<5;i++){
+      const step=document.getElementById('step'+i), dot=document.getElementById('dot'+i);
+      step.classList.remove('active'); dot.classList.remove('done','current');
+      step.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('selected'));
+      document.getElementById('next'+i).style.display='none';
+    }
+    document.getElementById('step0').classList.add('active');
+    document.getElementById('dot0').classList.add('current');
+    document.getElementById('stepLabel').textContent='QUESTION 1 OF 5';
+  }
+</script>
+</body>
+</html>
